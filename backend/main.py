@@ -6,12 +6,14 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(__file__)))
 from flask import Flask, render_template
 from flask_cors import CORS
 from flask_socketio import SocketIO, emit, join_room, leave_room
-from src.models.user import db
-from src.routes.passenger import passenger_bp
-from src.routes.driver import driver_bp
-from src.routes.ride import ride_bp
-from src.routes.admin import admin_bp
-from src.routes.maps import maps_bp
+
+# تعديل المسارات لتتناسب مع مجلدات المشروع الفعلية
+from database.user import db
+from routes.passenger import passenger_bp
+from routes.driver import driver_bp
+from routes.ride import ride_bp
+from routes.admin import admin_bp
+from routes.maps import maps_bp
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'smart_taxi_secret_key_2025'
@@ -90,4 +92,3 @@ if __name__ == '__main__':
     with app.app_context():
         db.create_all()
     socketio.run(app, host='0.0.0.0', port=5000, debug=True)
-
